@@ -487,6 +487,8 @@ type KeybindingUniversalConfig struct {
 	PrevTab                           string   `yaml:"prevTab"`
 	NextScreenMode                    string   `yaml:"nextScreenMode"`
 	PrevScreenMode                    string   `yaml:"prevScreenMode"`
+	ToggleMainPanel                   string   `yaml:"toggleMainPanel"`
+	ToggleLeftSidePanel               string   `yaml:"toggleLeftSidePanel"`
 	CyclePagers                       string   `yaml:"cyclePagers"`
 	Undo                              string   `yaml:"undo"`
 	Redo                              string   `yaml:"redo"`
@@ -971,6 +973,8 @@ func GetDefaultConfigForPlatform(platform string) *UserConfig {
 				PrevTab:                           "[",
 				NextScreenMode:                    "+",
 				PrevScreenMode:                    "_",
+				ToggleMainPanel:                   "<f2>",
+				ToggleLeftSidePanel:               "<f3>",
 				CyclePagers:                       "|",
 				Undo:                              "z",
 				Redo:                              "Z",

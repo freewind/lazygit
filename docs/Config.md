@@ -663,6 +663,8 @@ keybinding:
     prevTab: '['
     nextScreenMode: +
     prevScreenMode: _
+    toggleMainPanel: <f2>
+    toggleLeftSidePanel: <f3>
     cyclePagers: '|'
     undo: z
     redo: Z

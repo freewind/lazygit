@@ -53,6 +53,10 @@ type WindowArrangementArgs struct {
 	// Whether the main panel is split (as is the case e.g. when a file has both
 	// staged and unstaged changes)
 	SplitMainPanel bool
+	// Whether the left side panel is hidden
+	HideLeftSidePanel bool
+	// Whether the main panel is hidden
+	HideMainPanel bool
 	// The current screen mode (normal, half, full)
 	ScreenMode types.ScreenMode
 	// The content shown on the bottom left of the screen when showing a loader
@@ -92,6 +96,8 @@ func (self *WindowArrangementHelper) GetWindowDimensions(informationStr string, 
 		CurrentWindow:     self.c.Context().CurrentStatic().GetWindowName(),
 		CurrentSideWindow: self.c.Context().CurrentSide().GetWindowName(),
 		SplitMainPanel:    repoState.GetSplitMainPanel(),
+		HideLeftSidePanel: repoState.GetHideLeftSidePanel(),
+		HideMainPanel:     repoState.GetHideMainPanel(),
 		ScreenMode:        repoState.GetScreenMode(),
 		AppStatus:         appStatus,
 		InformationStr:    informationStr,
@@ -259,6 +265,20 @@ func getMidSectionWeights(args WindowArrangementArgs) (int, int) {
 			}
 		} else if args.ScreenMode == types.SCREEN_FULL {
 			mainSectionWeight = 0
+		}
+	}
+
+	if args.HideLeftSidePanel {
+		sideSectionWeight = 0
+		if mainSectionWeight == 0 {
+			mainSectionWeight = 1
+		}
+	}
+
+	if args.HideMainPanel {
+		mainSectionWeight = 0
+		if sideSectionWeight == 0 {
+			sideSectionWeight = 1
 		}
 	}
 

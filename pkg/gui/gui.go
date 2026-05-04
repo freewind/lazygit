@@ -232,7 +232,9 @@ type GuiRepoState struct {
 	Model *types.Model
 	Modes *types.Modes
 
-	SplitMainPanel bool
+	SplitMainPanel    bool
+	HideLeftSidePanel bool
+	HideMainPanel     bool
 
 	SearchState  *types.SearchState
 	StartupStage types.StartupStage // Allows us to not load everything at once
@@ -305,6 +307,22 @@ func (self *GuiRepoState) SetSplitMainPanel(value bool) {
 
 func (self *GuiRepoState) GetSplitMainPanel() bool {
 	return self.SplitMainPanel
+}
+
+func (self *GuiRepoState) SetHideLeftSidePanel(value bool) {
+	self.HideLeftSidePanel = value
+}
+
+func (self *GuiRepoState) GetHideLeftSidePanel() bool {
+	return self.HideLeftSidePanel
+}
+
+func (self *GuiRepoState) SetHideMainPanel(value bool) {
+	self.HideMainPanel = value
+}
+
+func (self *GuiRepoState) GetHideMainPanel() bool {
+	return self.HideMainPanel
 }
 
 func (gui *Gui) onSwitchToNewRepo(startArgs appTypes.StartArgs, contextKey types.ContextKey) error {

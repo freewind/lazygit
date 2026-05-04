@@ -61,6 +61,16 @@ func (self *GlobalController) GetKeybindings(opts types.KeybindingsOpts) []*type
 			Description: self.c.Tr.PrevScreenMode,
 		},
 		{
+			Key:         opts.GetKey(opts.Config.Universal.ToggleMainPanel),
+			Handler:     opts.Guards.NoPopupPanel(self.toggleMainPanel),
+			Description: self.c.Tr.ToggleMainPanel,
+		},
+		{
+			Key:         opts.GetKey(opts.Config.Universal.ToggleLeftSidePanel),
+			Handler:     opts.Guards.NoPopupPanel(self.toggleLeftSidePanel),
+			Description: self.c.Tr.ToggleLeftSidePanel,
+		},
+		{
 			Key:               opts.GetKey(opts.Config.Universal.CyclePagers),
 			Handler:           opts.Guards.NoPopupPanel(self.cyclePagers),
 			GetDisabledReason: self.canCyclePagers,
@@ -178,6 +188,34 @@ func (self *GlobalController) nextScreenMode() error {
 
 func (self *GlobalController) prevScreenMode() error {
 	return (&ScreenModeActions{c: self.c}).Prev()
+}
+
+func (self *GlobalController) toggleMainPanel() error {
+	repoState := self.c.State().GetRepoState()
+	hide := !repoState.GetHideMainPanel()
+	repoState.SetHideMainPanel(hide)
+	repoState.SetHideLeftSidePanel(false)
+
+	if hide && self.c.Context().CurrentStatic().GetKind() != types.SIDE_CONTEXT {
+		self.c.Context().Push(self.c.Context().CurrentSide(), types.OnFocusOpts{})
+	}
+
+	self.c.Render()
+	return nil
+}
+
+func (self *GlobalController) toggleLeftSidePanel() error {
+	repoState := self.c.State().GetRepoState()
+	hide := !repoState.GetHideLeftSidePanel()
+	repoState.SetHideLeftSidePanel(hide)
+	repoState.SetHideMainPanel(false)
+
+	if hide && self.c.Context().CurrentStatic().GetKind() == types.SIDE_CONTEXT {
+		self.c.Context().Push(self.c.Contexts().Normal, types.OnFocusOpts{})
+	}
+
+	self.c.Render()
+	return nil
 }
 
 func (self *GlobalController) cyclePagers() error {

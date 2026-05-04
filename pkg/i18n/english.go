@@ -606,6 +606,8 @@ type TranslationSet struct {
 	ViewResetToUpstreamOptions            string
 	NextScreenMode                        string
 	PrevScreenMode                        string
+	ToggleMainPanel                       string
+	ToggleLeftSidePanel                   string
 	CyclePagers                           string
 	CyclePagersTooltip                    string
 	CyclePagersDisabledReason             string
@@ -1734,6 +1736,8 @@ func EnglishTranslationSet() *TranslationSet {
 		ViewResetToUpstreamOptions:       "View upstream reset options",
 		NextScreenMode:                   "Next screen mode (normal/half/fullscreen)",
 		PrevScreenMode:                   "Prev screen mode",
+		ToggleMainPanel:                  "Toggle main panel",
+		ToggleLeftSidePanel:              "Toggle left side panel",
 		CyclePagers:                      "Cycle pagers",
 		CyclePagersTooltip:               "Choose the next pager in the list of configured pagers",
 		CyclePagersDisabledReason:        "No other pagers configured",

@@ -392,6 +392,10 @@ type IRepoStateAccessor interface {
 	GetSearchState() *SearchState
 	SetSplitMainPanel(bool)
 	GetSplitMainPanel() bool
+	SetHideLeftSidePanel(bool)
+	GetHideLeftSidePanel() bool
+	SetHideMainPanel(bool)
+	GetHideMainPanel() bool
 }
 
 // startup stages so we don't need to load everything at once
